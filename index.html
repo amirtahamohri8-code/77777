@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Backrooms: Ultimate 4D Masterpiece</title>
+    <title>Backrooms: Ultimate 4D Masterpiece Pro</title>
     <style>
         * { box-sizing: border-box; touch-action: none; }
         body, html {
@@ -16,127 +16,78 @@
             -webkit-user-select: none;
         }
         #canvas-container {
-            width: 100vw;
-            height: 100vh;
-            display: block;
-            position: absolute;
+            width: 100vw; height: 100vh;
+            display: block; position: absolute;
             top: 0; left: 0;
         }
         #vhs-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             background-size: 100% 3px, 4px 100%;
-            z-index: 10;
-            opacity: 0.6;
+            z-index: 10; opacity: 0.5;
         }
         #fps-meter {
-            position: absolute;
-            top: 15px; right: 20px;
-            color: #00ff66;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 5px 12px;
-            border: 1px solid #00ff66;
-            font-size: 14px;
-            z-index: 30;
-            border-radius: 4px;
+            position: absolute; top: 15px; right: 20px;
+            color: #00ff66; background: rgba(0, 0, 0, 0.85);
+            padding: 5px 12px; border: 1px solid #00ff66;
+            font-size: 14px; z-index: 30; border-radius: 4px;
         }
         #hud-title {
-            position: absolute;
-            top: 15px; left: 20px;
-            color: #f1c40f;
-            font-size: 13px;
-            text-shadow: 0 0 8px #000;
-            z-index: 20;
-            letter-spacing: 1px;
-            font-weight: bold;
+            position: absolute; top: 15px; left: 20px;
+            color: #f1c40f; font-size: 13px;
+            text-shadow: 0 0 8px #000; z-index: 20; font-weight: bold;
         }
         #joystick-zone {
-            position: absolute;
-            bottom: 30px; left: 30px;
+            position: absolute; bottom: 30px; left: 30px;
             width: 140px; height: 140px;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(241, 196, 15, 0.4);
-            border-radius: 50%;
-            z-index: 20;
-            backdrop-filter: blur(4px);
+            border-radius: 50%; z-index: 20; backdrop-filter: blur(4px);
         }
         #joystick-knob {
-            position: absolute;
-            top: 45px; left: 45px;
+            position: absolute; top: 45px; left: 45px;
             width: 50px; height: 50px;
             background: rgba(241, 196, 15, 0.9);
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(241, 196, 15, 0.7);
+            border-radius: 50%; box-shadow: 0 0 15px rgba(241, 196, 15, 0.7);
             pointer-events: none;
         }
         #btn-action {
-            position: absolute;
-            bottom: 40px; right: 40px;
-            width: 90px; height: 90px;
+            position: absolute; bottom: 40px; right: 40px;
+            width: 95px; height: 95px;
             background: rgba(46, 204, 113, 0.9);
-            border: 3px solid #fff;
-            border-radius: 50%;
-            color: #fff;
-            font-weight: bold;
-            font-size: 15px;
-            z-index: 20;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 25px rgba(46, 204, 113, 0.9);
-            text-align: center;
+            border: 3px solid #fff; border-radius: 50%;
+            color: #fff; font-weight: bold; font-size: 14px;
+            z-index: 20; display: none; align-items: center; justify-content: center;
+            box-shadow: 0 0 25px rgba(46, 204, 113, 0.9); text-align: center;
         }
         #btn-run {
-            position: absolute;
-            bottom: 150px; right: 50px;
+            position: absolute; bottom: 150px; right: 50px;
             width: 70px; height: 70px;
             background: rgba(231, 76, 60, 0.9);
-            border: 2px solid #fff;
-            border-radius: 50%;
-            color: #fff;
-            font-weight: bold;
-            font-size: 14px;
-            z-index: 20;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 2px solid #fff; border-radius: 50%;
+            color: #fff; font-weight: bold; font-size: 14px;
+            z-index: 20; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 15px rgba(231, 76, 60, 0.7);
         }
         #crosshair {
-            position: absolute;
-            top: 50%; left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 6px; height: 6px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            z-index: 20;
-            pointer-events: none;
-            box-shadow: 0 0 8px #fff;
+            width: 6px; height: 6px; background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%; z-index: 20; pointer-events: none; box-shadow: 0 0 8px #fff;
         }
         #story-box {
-            position: absolute;
-            top: 25%; left: 50%;
+            position: absolute; top: 20%; left: 50%;
             transform: translateX(-50%);
-            background: rgba(5, 5, 5, 0.92);
-            border: 2px solid #f1c40f;
-            color: #fff;
-            padding: 20px 30px;
-            font-size: 17px;
-            text-align: center;
-            z-index: 40;
-            display: none;
-            border-radius: 8px;
-            box-shadow: 0 0 40px rgba(241,196,15,0.5);
-            max-width: 85%;
-            line-height: 1.7;
+            background: rgba(5, 5, 5, 0.95);
+            border: 2px solid #f1c40f; color: #fff;
+            padding: 20px 30px; font-size: 16px; text-align: center;
+            z-index: 40; display: none; border-radius: 8px;
+            box-shadow: 0 0 40px rgba(241,196,15,0.6); max-width: 85%; line-height: 1.7;
         }
         #warning-rotate {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 9999;
-            display: none;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 9999; display: none;
             align-items: center; justify-content: center;
             color: #f1c40f; font-size: 22px; text-align: center; padding: 20px;
         }
@@ -151,7 +102,7 @@
     <div id="vhs-overlay"></div>
     <div id="crosshair"></div>
     <div id="fps-meter">FPS: 60</div>
-    <div id="hud-title">BACKROOMS: LEVEL 6 REMASTER</div>
+    <div id="hud-title">BACKROOMS 4D: LEVEL 6 ULTIMATE</div>
     
     <div id="story-box"></div>
 
@@ -159,7 +110,7 @@
         <div id="joystick-knob"></div>
     </div>
     <div id="btn-run">دویدن</div>
-    <div id="btn-action">باز کردن</div>
+    <div id="btn-action">ورود</div>
 
     <div id="canvas-container"></div>
 
@@ -169,10 +120,10 @@
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0a0a0a);
-        scene.fog = new THREE.FogExp2(0x0a0a0a, 0.025);
+        scene.fog = new THREE.FogExp2(0x0a0a0a, 0.015);
 
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 2.5, 20);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, 3, 30);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -181,59 +132,60 @@
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         container.appendChild(renderer.domElement);
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        // نورپردازی فوق‌العاده قوی و حرفه‌ای
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
         scene.add(ambientLight);
 
-        const sunLight = new THREE.DirectionalLight(0xffeedd, 0.8);
-        sunLight.position.set(50, 100, 50);
+        const sunLight = new THREE.DirectionalLight(0xffeedd, 1.5);
+        sunLight.position.set(100, 200, 100);
         sunLight.castShadow = true;
         scene.add(sunLight);
 
-        // ساخت دنیای تپه‌ای اولیه (الهام گرفته از تصویر شما)
-        const groundGeo = new THREE.PlaneGeometry(300, 300, 64, 64);
+        // دنیای باز اولیه (تپه‌ای عظیم)
+        const groundGeo = new THREE.PlaneGeometry(600, 600, 128, 128);
         groundGeo.rotateX(-Math.PI / 2);
         const pos = groundGeo.attributes.position;
         for (let i = 0; i < pos.count; i++) {
             const vx = pos.getX(i);
             const vz = pos.getZ(i);
-            pos.setY(i, Math.sin(vx * 0.05) * Math.cos(vz * 0.05) * 4);
+            pos.setY(i, Math.sin(vx * 0.03) * Math.cos(vz * 0.03) * 8);
         }
         groundGeo.computeVertexNormals();
-        const groundMat = new THREE.MeshStandardMaterial({ color: 0x224411, roughness: 0.9 });
+        const groundMat = new THREE.MeshStandardMaterial({ color: 0x1e3f10, roughness: 0.9 });
         const ground = new THREE.Mesh(groundGeo, groundMat);
         ground.receiveShadow = true;
         scene.add(ground);
 
         // درِ ورود به بک‌رومز روی تپه
         const doorGroup = new THREE.Group();
-        const doorFrameMat = new THREE.MeshStandardMaterial({ color: 0x555555 });
-        const doorPanelMat = new THREE.MeshStandardMaterial({ color: 0x8B4513, roughness: 0.5 });
+        const doorFrameMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
+        const doorPanelMat = new THREE.MeshStandardMaterial({ color: 0x5a3d28, roughness: 0.4 });
         
-        const frameMesh = new THREE.Mesh(new THREE.BoxGeometry(2.2, 3.2, 0.3), doorFrameMat);
-        frameMesh.position.y = 1.6;
+        const frameMesh = new THREE.Mesh(new THREE.BoxGeometry(2.4, 3.5, 0.4), doorFrameMat);
+        frameMesh.position.y = 1.75;
         doorGroup.add(frameMesh);
 
-        const rotatingDoor = new THREE.Mesh(new THREE.BoxGeometry(1.8, 3.0, 0.15), doorPanelMat);
-        rotatingDoor.position.set(0.9, 1.5, 0);
+        const rotatingDoor = new THREE.Mesh(new THREE.BoxGeometry(2.0, 3.2, 0.2), doorPanelMat);
+        rotatingDoor.position.set(1.0, 1.6, 0);
         doorGroup.add(rotatingDoor);
-        doorGroup.position.set(0, 2, -15);
+        doorGroup.position.set(0, 3, -20);
         scene.add(doorGroup);
 
-        // صداها با Web Audio API
+        // سیستم صوتی اکو و باز و بسته شدن در
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSlamSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.3);
-            gain.gain.setValueAtTime(0.8, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(20, audioCtx.currentTime + 0.6);
+            gain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
             osc.start();
-            osc.stop(audioCtx.currentTime + 0.5);
+            osc.stop(audioCtx.currentTime + 0.8);
         }
 
         let gameState = 'OUTSIDE'; // OUTSIDE, BACKROOMS, END
@@ -251,84 +203,98 @@
             }
         }
 
-        showMsg("به دنیای مرموز خوش آمدید. به سمت درِ روی تپه بروید.", 4000);
+        showMsg("به بازی خوش آمدید. به سمت درِ روی تپه بروید.", 4000);
 
-        // ساخت دنیای بک‌رومز سطح ۶ (راهروی زرد رنگ بزرگ)
+        // ساخت دنیای عظیم بک‌رومز سطح ۶ (راهروی بسیار بزرگ، جزییات بی‌نهایت و لامپ‌های سیم‌کشی شده)
         function createBackroomsWorld() {
             scene.background = new THREE.Color(0x0f0d08);
-            scene.fog = new THREE.FogExp2(0x0f0d08, 0.04);
+            scene.fog = new THREE.FogExp2(0x0f0d08, 0.02);
             ambientLight.color.set(0xffaa22);
-            ambientLight.intensity = 0.5;
+            ambientLight.intensity = 1.0;
 
-            // حذف دنیای بیرون
             scene.remove(ground);
             scene.remove(doorGroup);
 
-            // بافت دیوار زرد بک‌رومز
+            // بافت دیوارهای زرد بک‌رومز با کیفیت بالا
             const canvas = document.createElement('canvas');
             canvas.width = 512; canvas.height = 512;
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#d4ac0d';
             ctx.fillRect(0, 0, 512, 512);
-            for (let i = 0; i < 2500; i++) {
-                ctx.fillStyle = Math.random() > 0.5 ? '#9a7d0a' : '#f1c40f';
-                ctx.fillRect(Math.random() * 512, Math.random() * 512, 4, 4);
+            for (let i = 0; i < 3000; i++) {
+                ctx.fillStyle = Math.random() > 0.5 ? '#8B6914' : '#FFD700';
+                ctx.fillRect(Math.random() * 512, Math.random() * 512, 5, 5);
             }
             const wallTex = new THREE.CanvasTexture(canvas);
             wallTex.wrapS = THREE.RepeatWrapping; wallTex.wrapT = THREE.RepeatWrapping;
-            wallTex.repeat.set(10, 2);
+            wallTex.repeat.set(30, 3);
 
-            const wallMat = new THREE.MeshStandardMaterial({ map: wallTex, roughness: 0.7 });
-            const floorMat = new THREE.MeshStandardMaterial({ color: 0x8d6e63, roughness: 0.9 });
-            const ceilMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
+            const wallMat = new THREE.MeshStandardMaterial({ map: wallTex, roughness: 0.6 });
+            const floorMat = new THREE.MeshStandardMaterial({ color: 0x7c5836, roughness: 0.8 });
+            const ceilMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
 
-            // راهروی بسیار بزرگ و پیچ‌درپیچ
-            const mw = new THREE.Mesh(new THREE.BoxGeometry(100, 4, 1), wallMat);
-            mw.position.set(0, 2, -50); scene.add(mw);
-            const mw2 = new THREE.Mesh(new THREE.BoxGeometry(100, 4, 1), wallMat);
-            mw2.position.set(0, 2, 50); scene.add(mw2);
-            const mw3 = new THREE.Mesh(new THREE.BoxGeometry(1, 4, 100), wallMat);
-            mw3.position.set(-50, 2, 0); scene.add(mw3);
-            const mw4 = new THREE.Mesh(new THREE.BoxGeometry(1, 4, 100), wallMat);
-            mw4.position.set(50, 2, 0); scene.add(mw4);
+            // مپ بسیار عظیم بک‌رومز
+            const mw1 = new THREE.Mesh(new THREE.BoxGeometry(300, 5, 2), wallMat);
+            mw1.position.set(0, 2.5, -150); scene.add(mw1);
+            const mw2 = new THREE.Mesh(new THREE.BoxGeometry(300, 5, 2), wallMat);
+            mw2.position.set(0, 2.5, 150); scene.add(mw2);
+            const mw3 = new THREE.Mesh(new THREE.BoxGeometry(2, 5, 300), wallMat);
+            mw3.position.set(-150, 2.5, 0); scene.add(mw3);
+            const mw4 = new THREE.Mesh(new THREE.BoxGeometry(2, 5, 300), wallMat);
+            mw4.position.set(150, 2.5, 0); scene.add(mw4);
 
-            const floor = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), floorMat);
+            const floor = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), floorMat);
             floor.rotation.x = -Math.PI / 2; scene.add(floor);
 
-            const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), ceilMat);
-            ceiling.rotation.x = Math.PI / 2; ceiling.position.y = 4; scene.add(ceiling);
+            const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), ceilMat);
+            ceiling.rotation.x = Math.PI / 2; ceiling.position.y = 5; scene.add(ceiling);
 
-            // برگه راهنما ۷ متر جلوتر از نقطه شروع
-            const noteGeo = new THREE.PlaneGeometry(1, 1.2);
+            // برگه راهنما ۷ متر جلوتر
+            const noteGeo = new THREE.PlaneGeometry(1.2, 1.5);
             const noteCanvas = document.createElement('canvas');
             noteCanvas.width = 256; noteCanvas.height = 300;
             const nCtx = noteCanvas.getContext('2d');
             nCtx.fillStyle = '#f4ecd8'; nCtx.fillRect(0,0,256,300);
-            nCtx.fillStyle = '#000'; nCtx.font = '22px Arial';
-            nCtx.fillText("تو داخل این دنیا باید", 20, 50);
-            nCtx.fillText("دنبال کلید بگردی تا", 20, 90);
-            nCtx.fillText("در باز بشه و برگردی!", 20, 130);
+            nCtx.fillStyle = '#000'; nCtx.font = 'bold 20px Arial';
+            nCtx.fillText("تو داخل این دنیا باید", 25, 60);
+            nCtx.fillText("دنبال کلید بگردی تا", 25, 100);
+            nCtx.fillText("در باز بشه و برگردی!", 25, 140);
             const noteMat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(noteCanvas) });
             noteMesh = new THREE.Mesh(noteGeo, noteMat);
-            noteMesh.position.set(0, 1.5, 10);
+            noteMesh.position.set(0, 2, 23); // ۷ متر جلوتر از نقطه شروع (که در ز 30 است)
             scene.add(noteMesh);
 
-            // کلید مخفی در جای سخت و دور
-            const keyGeo = new THREE.BoxGeometry(0.6, 0.2, 0.2);
-            keyMesh = new THREE.Mesh(keyGeo, new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 1 }));
-            keyMesh.position.set(35, 0.5, -35);
+            // کلید پنهان در جای بسیار سخت و دور
+            const keyGeo = new THREE.BoxGeometry(0.8, 0.3, 0.3);
+            keyMesh = new THREE.Mesh(keyGeo, new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9 }));
+            keyMesh.position.set(110, 0.8, -110);
             scene.add(keyMesh);
 
-            // در خروج نهایی با تابلوی راه خروج
-            exitDoor = new THREE.Mesh(new THREE.BoxGeometry(2, 3.2, 0.2), new THREE.MeshStandardMaterial({ color: 0x444444 }));
-            exitDoor.position.set(0, 1.6, 49);
-            scene.add(exitDoor);
+            // در خروج با تابلوی فارسی "راه خروج"
+            const doorGroupBack = new THREE.Group();
+            exitDoor = new THREE.Mesh(new THREE.BoxGeometry(2.4, 3.5, 0.3), new THREE.MeshStandardMaterial({ color: 0x444444 }));
+            exitDoor.position.set(0, 1.75, 149);
+            doorGroupBack.add(exitDoor);
+            
+            // تابلوی راه خروج
+            const signGeo = new THREE.PlaneGeometry(2, 0.6);
+            const signCanvas = document.createElement('canvas');
+            signCanvas.width = 256; signCanvas.height = 64;
+            const sCtx = signCanvas.getContext('2d');
+            sCtx.fillStyle = '#00ff00'; sCtx.fillRect(0,0,256,64);
+            sCtx.fillStyle = '#000'; sCtx.font = 'bold 26px Arial';
+            sCtx.fillText("راه خروج", 80, 42);
+            const signMat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(signCanvas) });
+            const signMesh = new THREE.Mesh(signGeo, signMat);
+            signMesh.position.set(0, 3.8, 149.2);
+            doorGroupBack.add(signMesh);
+            scene.add(doorGroupBack);
 
-            camera.position.set(0, 1.8, 18);
+            camera.position.set(0, 2, 30);
             camera.rotation.set(0, 0, 0);
         }
 
-        // کنترل جوی استیک و لمس
+        // کنترل جوی‌استیک لمسی دقیق
         let moveX = 0, moveZ = 0, isRunning = false;
         const joystickZone = document.getElementById('joystick-zone');
         const joystickKnob = document.getElementById('joystick-knob');
@@ -396,30 +362,41 @@
                 playSlamSound();
                 let angle = 0;
                 const closeAnim = setInterval(() => {
-                    angle -= 0.1;
+                    angle -= 0.12;
                     rotatingDoor.rotation.y = angle;
-                    if (angle <= -Math..PI / 2) {
+                    if (angle <= -Math.PI / 2) {
                         clearInterval(closeAnim);
                         gameState = 'BACKROOMS';
                         createBackroomsWorld();
                         btnAction.style.display = 'none';
-                        showMsg("در پشت سرتان بسته شد! برگه را پیدا کنید.", 3500);
+                        showMsg("در پشت سرتان با صدای اکو بسته شد! برگه راهنما را پیدا کنید.", 4000);
                     }
-                }, 20);
+                }, 15);
             } else if (gameState === 'BACKROOMS' && actionType === 'takeKey') {
                 hasKey = true;
                 scene.remove(keyMesh);
                 keyMesh = null;
                 btnAction.style.display = 'none';
                 playSlamSound();
-                showMsg("کلید پیدا شد! سریع به سمت درِ خروج بروید.", 3000);
+                showMsg("کلید پیدا شد! درِ خروج به سرعت باز شد!", 3000);
             } else if (gameState === 'BACKROOMS' && actionType === 'exitGame') {
                 if (hasKey) {
                     gameState = 'END';
                     btnAction.style.display = 'none';
-                    showMsg("تبریک! شما از بک‌رومز فرار کردید.<br><b>تیتراژ پایانی:</b> طراح و توسعه‌دهنده: هوش مصنوعی و شما. پایان بازی.", 0);
+                    playSlamSound();
+                    
+                    // تیتراژ سینمایی ۳۰ ثانیه‌ای پایان بازی
+                    let countdown = 30;
+                    const endingInterval = setInterval(() => {
+                        showMsg(`🏆 <b>پایان بازی - تیتراژ سینمایی</b><br>شما با موفقیت از لول ۶ بک‌رومز فرار کردید!<br>طراح: امیرطاها و هوش مصنوعی<br>بازگشت به دنیای واقعی... (${countdown} ثانیه)`, 1000);
+                        countdown--;
+                        if (countdown < 0) {
+                            clearInterval(endingInterval);
+                            location.reload();
+                        }
+                    }, 1000);
                 } else {
-                    showMsg("در قفل است! به کلید نیاز دارید.", 2000);
+                    showMsg("در قفل است! اول باید کلید را پیدا کنید.", 2000);
                 }
             }
         });
@@ -428,7 +405,7 @@
         function animate() {
             requestAnimationFrame(animate);
             const delta = clock.getDelta();
-            const speed = isRunning ? 7.0 : 3.5;
+            const speed = isRunning ? 9.0 : 4.5;
 
             if (moveZ !== 0 || moveX !== 0) {
                 camera.translateZ(moveZ * speed * delta);
@@ -437,7 +414,7 @@
 
             if (gameState === 'OUTSIDE') {
                 const dist = camera.position.distanceTo(doorGroup.position);
-                if (dist < 4.0) {
+                if (dist < 5.0) {
                     btnAction.style.display = 'flex';
                     actionType = 'enterBackrooms';
                     btnAction.innerHTML = 'ورود به در';
@@ -445,31 +422,15 @@
                     btnAction.style.display = 'none';
                 }
             } else if (gameState === 'BACKROOMS') {
-                if (noteMesh && camera.position.distanceTo(noteMesh.position) < 3.0) {
-                    showMsg("راهنما: کلید در انتهای سالن پنهان شده است.", 2000);
+                if (noteMesh && camera.position.distanceTo(noteMesh.position) < 3.5) {
+                    showMsg("راهنما: کلید در اعماق سالن پنهان شده است.", 2000);
                 }
-                if (keyMesh && camera.position.distanceTo(keyMesh.position) < 2.5) {
+                if (keyMesh && camera.position.distanceTo(keyMesh.position) < 3.0) {
                     btnAction.style.display = 'flex';
                     actionType = 'takeKey';
                     btnAction.innerHTML = 'برداشتن کلید';
-                } else if (exitDoor && camera.position.distanceTo(exitDoor.position) < 3.5) {
+                } else if (exitDoor && camera.position.distanceTo(exitDoor.position) < 4.0) {
                     btnAction.style.display = 'flex';
                     actionType = 'exitGame';
-                    btnAction.innerHTML = 'خروج';
-                } else if (!keyMesh || camera.position.distanceTo(keyMesh.position) >= 2.5) {
-                    btnAction.style.display = 'none';
-                }
-            }
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
-</body>
-</html>
+                    btnAction.innerHTML = hasKey ? 'خروج نهایی' : 'قفل است';
+                } else if (!keyMesh || ca
